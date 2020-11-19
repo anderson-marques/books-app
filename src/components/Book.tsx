@@ -15,7 +15,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-import { URL } from 'url';
+import { parse as ParseURL } from 'url';
 
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ const { REACT_APP_BOOKS_API_URL } = process.env;
 
 const isValidImage = (value: string): boolean => {
   try {
-    new URL(value);
+    ParseURL(value);
     return value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.png');
   } catch (TypeError) {
     return false;
@@ -118,11 +118,11 @@ const Book = () => {
   const fieldsNotSet = () => inputTitle.length === 0 || inputAuthors.length === 0 || inputImage.length === 0;
 
   const addBook = () => {
-    const notInTheList = bookList.some((book) => book.id === inputTitle);
+    const notInTheList = !bookList.some((book) => book.id === inputTitle);
 
     if (notInTheList) {
-      if (!inputTitle || !inputAuthors || !isValidImage(inputImage)) {
-        return alert('Invalid Book');
+      if (!isValidImage(inputImage)) {
+        return alert('Invalid image! It must be a valid URL with extension jpg, png, or gif');
       }
 
       const newBook: BookModel = {
