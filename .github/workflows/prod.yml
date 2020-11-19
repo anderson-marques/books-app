@@ -1,0 +1,44 @@
+name: Prod
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+  BOOKS_API_URL: ${{ secrets.BOOKS_API_URL }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region:  ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Install
+        run: yarn ci
+
+      - name: Test
+        run: yarn test
+
+      - name: Build
+        run: yarn build
+
+      - name: Deploy
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        env:
+          SOURCE_DIR: "build"

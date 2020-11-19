@@ -1,0 +1,14 @@
+[
+  {
+    "title": "1984",
+    "authors": "Erich Fromm",
+    "price": 16.99,
+    "image": "https://images-na.ssl-images-amazon.com/images/I/41aM4xOZxaL._AC_SX368_.jpg"
+  },
+  {
+    "title": "A Brief History of Time",
+    "authors": "Stephen Hawking",
+    "price": 7.17,
+    "image": "https://images-na.ssl-images-amazon.com/images/I/51+GySc8ExL._AC_SX368_.jpg"
+  }
+]
