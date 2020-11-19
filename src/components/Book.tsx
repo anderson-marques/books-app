@@ -15,7 +15,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-import { URL } from 'url';
+import { URL } from 'url';
 
 import axios from 'axios';
 
@@ -24,11 +24,11 @@ const { REACT_APP_BOOKS_API_URL } = process.env;
 const isValidImage = (value: string): boolean => {
   try {
     new URL(value);
-    return  value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.png');
+    return value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.png');
   } catch (TypeError) {
     return false;
   }
-}
+};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -117,7 +117,6 @@ const Book = () => {
 
   const fieldsNotSet = () => inputTitle.length === 0 || inputAuthors.length === 0 || inputImage.length === 0;
 
-
   const addBook = () => {
     const notInTheList = bookList.some((book) => book.id === inputTitle);
 
@@ -137,9 +136,9 @@ const Book = () => {
         .then(() => {
           const newBookList: Array<BookModel> = [...bookList, newBook];
           setBookList(newBookList);
-          setInputTitle('')
-          setInputAuthors('')
-          setInputImage('')
+          setInputTitle('');
+          setInputAuthors('');
+          setInputImage('');
         })
         .catch((err) => {
           console.error(`Error creating the new book`, err);
