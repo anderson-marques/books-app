@@ -24,8 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:check": "eslint '*/**/*.{js,ts,tsx}'",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint:check": "eslint './src/**/*.{js,ts,tsx}'",
+    "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "eslintConfig": {
     "extends": [
