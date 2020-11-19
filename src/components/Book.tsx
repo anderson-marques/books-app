@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -116,7 +116,7 @@ const Book = () => {
 
     axios
       .post(`${BOOKS_API_URL}/books`, newBook)
-      .then((_) => {
+      .then(() => {
         const newBookList: Array<BookModel> = [...bookList, newBook];
         setBookList(newBookList);
       })
