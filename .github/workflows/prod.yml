@@ -30,7 +30,7 @@ jobs:
           aws-region:  ${{ secrets.AWS_DEFAULT_REGION }}
 
       - name: Install
-        run: yarn ci
+        run: yarn install
 
       - name: Test
         run: yarn test
