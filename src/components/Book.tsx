@@ -18,7 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import axios from 'axios';
 
-const { BOOKS_API_URL } = process.env;
+const { REACT_APP_BOOKS_API_URL } = process.env;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -97,7 +97,7 @@ const Book = () => {
   const [inputImage, setInputImage] = useState('');
 
   useEffect(() => {
-    fetch(`${BOOKS_API_URL}/books`)
+    fetch(`${REACT_APP_BOOKS_API_URL}/books`)
       .then((res) => res.json())
       .then((data) => {
         setBookList(data.books);
@@ -115,7 +115,7 @@ const Book = () => {
     };
 
     axios
-      .post(`${BOOKS_API_URL}/books`, newBook)
+      .post(`${REACT_APP_BOOKS_API_URL}/books`, newBook)
       .then(() => {
         const newBookList: Array<BookModel> = [...bookList, newBook];
         setBookList(newBookList);
