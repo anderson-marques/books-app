@@ -108,21 +108,24 @@ const Book = () => {
   const fieldsNotSet = () => inputTitle.length === 0 || inputAuthors.length === 0 || inputImage.length === 0;
 
   const addBook = () => {
-    const newBook: BookModel = {
-      title: inputTitle,
-      authors: inputAuthors,
-      image: inputImage,
-    };
+    const notInTheList = bookList.some((book) => book.id === inputTitle);
+    if (notInTheList) {
+      const newBook: BookModel = {
+        title: inputTitle,
+        authors: inputAuthors,
+        image: inputImage,
+      };
 
-    axios
-      .post(`${REACT_APP_BOOKS_API_URL}/books`, newBook)
-      .then(() => {
-        const newBookList: Array<BookModel> = [...bookList, newBook];
-        setBookList(newBookList);
-      })
-      .catch((err) => {
-        console.error(`Error creating the new book`, err);
-      });
+      axios
+        .post(`${REACT_APP_BOOKS_API_URL}/books`, newBook)
+        .then(() => {
+          const newBookList: Array<BookModel> = [...bookList, newBook];
+          setBookList(newBookList);
+        })
+        .catch((err) => {
+          console.error(`Error creating the new book`, err);
+        });
+    }
   };
 
   return (
